@@ -1,0 +1,39 @@
+=== docker ps ===
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                                         NAMES
+36861018b5ce   employee-frontend:1.0   "/docker-entrypoint.…"   2 minutes ago    Up 2 minutes    0.0.0.0:4200->80/tcp, [::]:4200->80/tcp       employee-frontend
+3944138dfd38   employee-backend:1.0    "flask run"              17 minutes ago   Up 17 minutes   0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp   employee-backend
+
+=== docker logs employee-frontend ===
+2026/10/15 09:27:31 [notice] 1#1: start worker process 31
+2026/10/15 09:27:31 [notice] 1#1: start worker process 32
+172.17.0.1 - - [15/Oct/2026:09:27:45 +0000] "HEAD / HTTP/1.1" 200 0 "-" "curl/8.18.0" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:18 +0000] "GET / HTTP/1.1" 200 2253 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:18 +0000] "GET /runtime-es2017.f489db0e03f596649dd6.js HTTP/1.1" 200 1182 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:18 +0000] "GET /polyfills-es2017.008d6bf86841c7289e0f.js HTTP/1.1" 200 36992 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:18 +0000] "GET /main-es2017.13a4cf2e2a74ac82c8c1.js HTTP/1.1" 200 266033 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:18 +0000] "GET /styles.ecf90b26eeda919029ed.css HTTP/1.1" 200 157315 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:19 +0000] "GET /favicon.ico HTTP/1.1" 200 948 "http://localhost:4200/employees" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:28:49 +0000] "GET /employees HTTP/1.1" 200 2253 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:30:02 +0000] "GET / HTTP/1.1" 200 2253 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:30:02 +0000] "GET /runtime-es2017.f489db0e03f596649dd6.js HTTP/1.1" 304 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:30:02 +0000] "GET /main-es2017.13a4cf2e2a74ac82c8c1.js HTTP/1.1" 304 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:30:02 +0000] "GET /polyfills-es2017.008d6bf86841c7289e0f.js HTTP/1.1" 304 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+172.17.0.1 - - [15/Oct/2026:09:30:02 +0000] "GET /styles.ecf90b26eeda919029ed.css HTTP/1.1" 304 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+
+=== curl -I http://localhost:4200 ===
+HTTP/1.1 200 OK
+Server: nginx/1.27.5
+Date: Thu, 15 Oct 2026 09:30:06 GMT
+Content-Type: text/html
+Content-Length: 2253
+Last-Modified: Thu, 15 Oct 2026 09:26:37 GMT
+Connection: keep-alive
+ETag: "6ad09c4d-8cd"
+Accept-Ranges: bytes
+
+=== Appels reçus par le backend depuis l'interface ===
+172.17.0.1 - - [15/Oct/2026 09:29:38] "[35m[1mPOST /api/v1/employees HTTP/1.1[0m" 201 -
+172.17.0.1 - - [15/Oct/2026 09:29:39] "GET /api/v1/employees HTTP/1.1" 200 -
+172.17.0.1 - - [15/Oct/2026 09:29:42] "GET /api/v1/employees/4 HTTP/1.1" 200 -
+172.17.0.1 - - [15/Oct/2026 09:29:43] "GET /api/v1/employees HTTP/1.1" 200 -
+172.17.0.1 - - [15/Oct/2026 09:30:02] "GET /api/v1/employees HTTP/1.1" 200 -

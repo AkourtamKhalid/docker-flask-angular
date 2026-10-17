@@ -1,0 +1,14 @@
+# Variables locales (peuvent contenir des secrets)
+.env
+
+# Dépendances et builds locaux
+node_modules/
+dist/
+.angular/
+__pycache__/
+*.pyc
+
+# Éditeurs / OS
+.vscode/
+.idea/
+*.log

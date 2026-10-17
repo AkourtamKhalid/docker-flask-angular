@@ -1,0 +1,19 @@
+=== docker ps ===
+CONTAINER ID   IMAGE                  COMMAND       CREATED              STATUS              PORTS                                         NAMES
+3944138dfd38   employee-backend:1.0   "flask run"   About a minute ago   Up About a minute   0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp   employee-backend
+
+=== docker logs ===
+ * Serving Flask app 'app.py'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8081
+ * Running on http://172.17.0.2:8081
+[33mPress CTRL+C to quit[0m
+172.17.0.1 - - [15/Oct/2026 09:12:34] "[33mGET / HTTP/1.1[0m" 404 -
+172.17.0.1 - - [15/Oct/2026 09:12:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+172.17.0.1 - - [15/Oct/2026 09:12:57] "GET /api/v1/employees HTTP/1.1" 200 -
+
+=== curl GET /api/v1/employees ===
+[{"emailId":"Benzema@gmail.com","firstName":"Karim","id":1,"lastName":"Benzema"},{"emailId":"Messi@gmail.com","firstName":"Leo","id":2,"lastName":"Messi"},{"emailId":"Cristiano@gmail.com","firstName":"Ronaldo","id":3,"lastName":"Cristiano"}]
+

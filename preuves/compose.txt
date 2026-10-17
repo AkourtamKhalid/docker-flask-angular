@@ -1,0 +1,48 @@
+=== docker compose ps ===
+NAME                   IMAGE                   COMMAND                  SERVICE    CREATED          STATUS                    PORTS
+docker-tp-backend-1    employee-backend:1.0    "flask run"              backend    12 seconds ago   Up 11 seconds (healthy)   0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp
+docker-tp-frontend-1   employee-frontend:1.0   "/docker-entrypoint.…"   frontend   12 seconds ago   Up 6 seconds (healthy)    0.0.0.0:4200->80/tcp, [::]:4200->80/tcp
+
+=== Réseau Docker ===
+NETWORK ID     NAME                     DRIVER    SCOPE
+8a38ba5e2d19   docker-tp_employee-net   bridge    local
+
+=== Communication par le réseau : frontend -> backend (nom DNS 'backend') ===
+[{"emailId":"Benzema@gmail.com","firstName":"Karim","id":1,"lastName":"Benzema"},{"emailId":"Messi@gmail.com","firstName":"Leo","id":2,"lastName":"Messi"},{"emailId":"Cristiano@gmail.com","firstName":"Ronaldo","id":3,"lastName":"Cristiano"}]
+
+
+=== Depuis la machine hôte ===
+-- Backend :
+[{"emailId":"Benzema@gmail.com","firstName":"Karim","id":1,"lastName":"Benzema"},{"emailId":"Messi@gmail.com","firstName":"Leo","id":2,"lastName":"Messi"},{"emailId":"Cristiano@gmail.com","firstName":"Ronaldo","id":3,"lastName":"Cristiano"}]
+
+-- Frontend :
+HTTP/1.1 200 OK
+
+=== docker compose logs (extrait) ===
+frontend-1  | 2026/10/15 09:36:15 [notice] 1#1: start worker process 30
+frontend-1  | 2026/10/15 09:36:15 [notice] 1#1: start worker process 31
+frontend-1  | 2026/10/15 09:36:15 [notice] 1#1: start worker process 32
+frontend-1  | 127.0.0.1 - - [15/Oct/2026:09:36:20 +0000] "GET / HTTP/1.1" 200 2253 "-" "Wget" "-"
+frontend-1  | 172.18.0.1 - - [15/Oct/2026:09:36:21 +0000] "HEAD / HTTP/1.1" 200 0 "-" "curl/8.18.0" "-"
+backend-1   | [33mPress CTRL+C to quit[0m
+backend-1   | 172.18.0.1 - - [15/Oct/2026 09:36:13] "[33mGET / HTTP/1.1[0m" 404 -
+backend-1   | 127.0.0.1 - - [15/Oct/2026 09:36:14] "GET /api/v1/employees HTTP/1.1" 200 -
+backend-1   | 172.18.0.3 - - [15/Oct/2026 09:36:21] "GET /api/v1/employees HTTP/1.1" 200 -
+backend-1   | 172.18.0.1 - - [15/Oct/2026 09:36:21] "GET /api/v1/employees HTTP/1.1" 200 -
+]633;E;echo;805cb51e-453f-422a-b539-f07a4814fa10]633;C
+=== docker compose down ===
+ Container docker-tp-frontend-1  Stopping
+ Container docker-tp-frontend-1  Stopped
+ Container docker-tp-frontend-1  Removing
+ Container docker-tp-frontend-1  Removed
+ Container docker-tp-backend-1  Stopping
+ Container docker-tp-backend-1  Stopped
+ Container docker-tp-backend-1  Removing
+ Container docker-tp-backend-1  Removed
+ Network docker-tp_employee-net  Removing
+ Network docker-tp_employee-net  Removed
+
+=== Après arrêt : conteneurs ===
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+=== Après arrêt : réseau ===
+NETWORK ID   NAME      DRIVER    SCOPE
